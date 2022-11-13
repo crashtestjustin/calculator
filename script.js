@@ -1,43 +1,40 @@
 let inputs = [];
-let outputAdd = 0;
-let outputSub = 0;
-let outputMul = 0;
-let outputDiv = 0;
+let calcOutput = 0;
 
 function operate(operator, num1, num2) {
     if (operator === '+') {
         addition(num1,num2);
-        console.log(outputAdd);
+        console.log(calcOutput);
     } else if (operator === '-') {
         subtraction(num1,num2);
-        console.log(outputSub);
+        console.log(calcOutput);
     } else if (operator === '*') {
         multiplication(num1,num2);
-        console.log(outputMul);
+        console.log(calcOutput);
     } else {
         division(num1,num2);
-        console.log(outputDiv);
+        console.log(calcOutput);
     }
 }
 
 function addition(a,b) {
-    outputAdd = a + b;
-    return outputAdd;
+    calcOutput = a + b;
+    return calcOutput;
 }
 
 function subtraction (a,b) {
-    outputSub = a - b;
-    return outputSub;
+    calcOutput = a - b;
+    return calcOutput;
 }
 
 function multiplication(a,b) {
-    outputMul = a * b;
-    return outputMul;
+    calcOutput = a * b;
+    return calcOutput;
 }
 
 function division(a,b) {
-    outputDiv = a / b;
-    return outputDiv;
+    calcOutput = a / b;
+    return calcOutput;
 }
 
-operate('+',10,20);
+operate('*',10,20);
