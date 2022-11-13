@@ -12,7 +12,7 @@ body {
     height: 600px;
     width: 400px;
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 25px;
     padding: 15px;
     background-color: #0066ff;
 }
@@ -32,6 +32,7 @@ body {
 .prev-display {
     display: flex;
     justify-content: flex-end;
+    margin: 5px 5px 0 0;
 }
 
 .display-content {
