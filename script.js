@@ -1,6 +1,16 @@
 let inputs = [];
 let calcOutput = 0;
 
+const calcButton = document.querySelectorAll('.calc-button');
+
+calcButton.forEach (button => {
+    button.addEventListener('click', e => {
+        console.log(e.target.id);
+    });
+});
+
+
+
 function operate(operator, num1, num2) {
     if (operator === '+') {
         addition(num1,num2);
