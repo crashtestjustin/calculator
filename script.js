@@ -1,8 +1,10 @@
 let inputs = [];
 let fullNum;
 let firstNum;
-let secondNum = 0;
+let secondNum;
+let newSecondNum;
 let calcOutput = 0;
+let previousCalc;
 let operator;
 
 const calcButton = document.querySelectorAll('.calc-button');
@@ -13,7 +15,7 @@ calcButton.forEach (button => {
     button.addEventListener('click', e => {
         if (e.target.id === 'clear') {
             mainDisplay.textContent = '';
-            clearInputs();
+            clearAllInputs();
         } else if (e.target.id === 'del') {
             removeValue();
             combineValue();
@@ -21,26 +23,44 @@ calcButton.forEach (button => {
         } else if (e.target.id === '+/-') {
             toggleInteger();
             mainDisplay.textContent = fullNum;
-            console.log(fullNum);
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
-            operator = e.target.id;
-            secondDisplay.textContent = `${fullNum} ${operator}`;
-            firstNum = fullNum;
-            clearInputs();
-            mainDisplay.textContent = 0;
+            if (!firstNum) {
+                operator = e.target.id;
+                secondDisplay.textContent = `${fullNum} ${operator}`;
+                firstNum = fullNum;
+                clearInputs();
+                mainDisplay.textContent = 0;
+            } else {
+                secondNum = fullNum;
+                operate(operator,firstNum,secondNum);
+                operator = e.target.id;
+                secondDisplay.textContent = `${calcOutput} ${operator}`;
+                console.log(operator);
+                firstNum = calcOutput;
+                secondNum = 0;
+                console.log(secondNum);
+                clearInputs();
+                mainDisplay.textContent = 0;
+            }
         } else if (e.target.id === '=') {
                 secondNum = fullNum
                 operate(operator,firstNum,secondNum);
                 mainDisplay.textContent = calcOutput;
-                secondDisplay.textContent = '';
-                firstNum = calcOutput;
-                fullNum = calcOutput;
+                secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
+                previousCalc = calcOutput;
                 clearInputArray();
-            console.log(fullNum);
-            console.log(firstNum);
-            console.log(secondNum);
-            console.log(calcOutput);
-            console.log(operator);
+                firstNum = calcOutput;
+                secondNum = parseInt(secondNum);
+                fullNum = secondNum;
+                console.log(operator);
+                console.log("fullNum");
+                console.log(fullNum);
+                console.log("firstNum");
+                console.log(firstNum);
+                console.log("secondNum");
+                console.log(secondNum);
+                console.log("calcOutput");
+                console.log(calcOutput);
         } else {
             inputs.push(e.target.id);
             combineValue();
@@ -55,12 +75,18 @@ function toggleInteger () {
     fullNum = fullNum * -1;
 }
 
-function combineValue () {
+function combineValue (comboNum) {
     if (fullNum < 0) {
-        fullNum = inputs.join('') * -1;
+        comboNum = inputs.join('') * -1;
+        fullNum = comboNum
     } else {
-        fullNum = inputs.join('');
+        comboNum = inputs.join('');
+        fullNum = comboNum;
     }
+}
+
+function newSecond () {
+    return inputs.join('');
 }
 
 function removeValue () {
@@ -114,5 +140,13 @@ function clearInputs () {
 }
 
 function clearInputArray () {
+    inputs = [];
+}
+
+function clearAllInputs () {
+    fullNum = 0;
+    firstNum = 0;
+    secondNum = 0;
+    calcOutput = 0;
     inputs = [];
 }
