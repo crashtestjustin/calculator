@@ -28,7 +28,7 @@ calcButton.forEach (button => {
             //for some reason (-4 + 4) turns to (4 + 4) and addind a seconf num is automaticall negative if num1 is negative
             toggleInteger();
             mainDisplay.textContent = fullNum;
-            firstNum = fullNum;
+            // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
                 if (calcOutput === 0) {
                     firstNum = firstNum;
@@ -72,11 +72,15 @@ calcButton.forEach (button => {
 });
 
 function toggleInteger () {
-    if (inputs[inputs.length - 1] === '.') {
+    if (!calcOutput) {
+        fullNum = fullNum * -1;
+        calcOutput = fullNum;
+    } else {
+        fullNum = calcOutput * -1;
     }
-    fullNum = fullNum * -1;
-    calcOutput = fullNum;
     console.log(fullNum);
+    // if (inputs[inputs.length - 1] === '.') {
+    // }
 }
 
 function combineValue (comboNum) {
