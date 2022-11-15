@@ -20,14 +20,19 @@ calcButton.forEach (button => {
         } else if (e.target.id === 'del') {
             removeValue();
             combineValue();
-            firstNum = fullNum;
+            firstNum = parseFloat(fullNum);
             console.log(fullNum);
-            mainDisplay.textContent = fullNum;
+            if (fullNum === NaN) {
+                mainDisplay.textContent = '';
+            } else {
+                mainDisplay.textContent = fullNum;
+            }
         } else if (e.target.id === '+/-') {
+            console.log("coming soon");
             //there's soemthing wrong with conversions to negative and positive here. 
             //for some reason (-4 + 4) turns to (4 + 4) and addind a seconf num is automaticall negative if num1 is negative
-            toggleInteger();
-            mainDisplay.textContent = fullNum;
+            // toggleInteger();
+            // mainDisplay.textContent = fullNum;
             // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
                 if (calcOutput === 0) {
