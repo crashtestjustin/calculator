@@ -20,7 +20,7 @@ body {
 .display-box {
     display: flex;
     flex-direction: column;
-    height: 100px;
+    height: 120px;
     border-radius: 8px;
     margin: 10px 5px;
     padding: 5px;
@@ -46,12 +46,12 @@ body {
     grid-template-columns: repeat(4, 1fr);
     column-gap: 5px;
     row-gap: 8px;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .calc-button {
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 600;
     margin: auto;
     width: 80px;
     height: 80px;
