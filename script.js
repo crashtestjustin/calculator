@@ -35,6 +35,8 @@ calcButton.forEach (button => {
             // mainDisplay.textContent = fullNum;
             // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
+                console.log("need to string together calculations");
+                //need to figure out how to string together calculations properly here.
                 if (calcOutput === 0) {
                     firstNum = firstNum;
                 } else if (!calcOutput) {
@@ -50,6 +52,8 @@ calcButton.forEach (button => {
                 console.log(firstNum);
                 console.log("secondNum");
                 console.log(secondNum);
+                console.log("calcOutput");
+                console.log(calcOutput);
         } else if (e.target.id === '=') {
                 secondNum = fullNum;
                 operate(operator,firstNum,secondNum);
