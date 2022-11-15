@@ -89,22 +89,22 @@ function operate(operator, num1, num2) {
 }
 
 function addition(a,b) {
-    calcOutput = parseInt(a) + parseInt(b);
+    calcOutput = parseFloat(a) + parseFloat(b);
     return calcOutput;
 }
 
 function subtraction (a,b) {
-    calcOutput = parseInt(a) - parseInt(b);
+    calcOutput = parseFloat(a) - parseFloat(b);
     return calcOutput;
 }
 
 function multiplication(a,b) {
-    calcOutput = parseInt(a) * parseInt(b);
+    calcOutput = parseFloat(a) * parseFloat(b);
     return calcOutput;
 }
 
 function division(a,b) {
-    calcOutput = parseInt(a) / parseInt(b);
+    calcOutput = parseFloat(a) / parseFloat(b);
     return calcOutput;
 }
 
