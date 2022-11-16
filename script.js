@@ -19,15 +19,23 @@ calcButton.forEach (button => {
             mainDisplay.textContent = '';
             clearAllInputs();
         } else if (e.target.id === 'del') {
-            removeValue();
-            combineValue();
-            firstNum = parseFloat(fullNum);
-            console.log(fullNum);
-            if (fullNum === NaN) {
-                mainDisplay.textContent = '';
+            if ((sequentialCalc == 0) && (secondDisplay.textContent !== '')) {
+                clearAllInputs();
+                mainDisplay.textContent = 0;
+            } else if ((sequentialCalc == 1) && (secondDisplay.textContent !== '')) {
+                mainDisplay.textContent = 0;
+                inputs = [];
             } else {
-                mainDisplay.textContent = fullNum;
+                if (inputs.length == 1) {
+                    clearAllInputs();
+                    mainDisplay.textContent = 0;
+                } else {
+                    removeValue();
+                    combineValue();
+                    mainDisplay.textContent = fullNum;
+                }
             }
+            console.log(fullNum);
         } else if (e.target.id === '+/-') {
             console.log("coming soon");
             //there's soemthing wrong with conversions to negative and positive here. 
@@ -48,20 +56,41 @@ calcButton.forEach (button => {
                     mainDisplay.textContent = '';
                     sequentialCalc++;
                 } else {
-                    calculation();
-                    operator = e.target.id;
-                    secondDisplay.textContent = `${calcOutput} ${operator}`;
-                    clearInputArray();
-                    mainDisplay.textContent = '';
+                        calculation();
+                        operator = e.target.id;
+                        secondDisplay.textContent = `${calcOutput} ${operator}`;
+                        clearInputArray();
+                        mainDisplay.textContent = '';
                 }
+                console.log(`FullNum: ${fullNum}`);
+                console.log(`firstNum: ${firstNum}`);
+                console.log(`secondNum: ${secondNum}`);
+                console.log(`calcOutput: ${calcOutput}`);
+                console.log(`inputs: ${inputs}`);
+                console.log(`operator: ${operator}`);
+                console.log(`sequentialCalc: ${sequentialCalc}`);
         } else if (e.target.id === '=') {
                 calculation();
                 clearInputArray();
                 sequentialCalc = 0;
+            console.log(`FullNum: ${fullNum}`);
+            console.log(`firstNum: ${firstNum}`);
+            console.log(`secondNum: ${secondNum}`);
+            console.log(`calcOutput: ${calcOutput}`);
+            console.log(`inputs: ${inputs}`);
+            console.log(`operator: ${operator}`);
+            console.log(`sequentialCalc: ${sequentialCalc}`);
         } else {
             inputs.push(e.target.id);
             combineValue();
             mainDisplay.textContent = fullNum;
+            console.log(`FullNum: ${fullNum}`);
+            console.log(`firstNum: ${firstNum}`);
+            console.log(`secondNum: ${secondNum}`);
+            console.log(`calcOutput: ${calcOutput}`);
+            console.log(`inputs: ${inputs}`);
+            console.log(`operator: ${operator}`);
+            console.log(`sequentialCalc: ${sequentialCalc}`);
         }
     });
 });
@@ -91,15 +120,15 @@ function newSecond () {
 }
 
 function removeValue () {
-    if (inputs[inputs.length - 2] === '.') {
-        newArray = inputs.slice(0, -2);
-        inputs = newArray;
-        console.log(inputs);
-    } else {
-        newArray = inputs.slice(0, -1);
-        inputs = newArray;
-        console.log(inputs);
-    }
+        if (inputs[inputs.length - 2] === '.') {
+            newArray = inputs.slice(0, -2);
+            inputs = newArray;
+            console.log(inputs);
+        } else {
+            newArray = inputs.slice(0, -1);
+            inputs = newArray;
+            console.log(inputs);
+        }
 }
 
 function calculation () {
