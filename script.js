@@ -48,7 +48,7 @@ calcButton.forEach (button => {
             printIT();
             // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
-                if (!firstNum) {
+                if (!firstNum || sequentialCalc < 1) {
                     firstNum = fullNum;
                 } else {
                     firstNum = firstNum;
@@ -83,6 +83,11 @@ calcButton.forEach (button => {
         } else {
             if (inputs == '' && fullNum < 0) {
                 toggleInteger();
+                inputs.push(e.target.id);
+                combineValue();
+                mainDisplay.textContent = fullNum;
+            } else if (calcOutput != undefined && inputs == '') {
+                clearInputArray();
                 inputs.push(e.target.id);
                 combineValue();
                 mainDisplay.textContent = fullNum;
