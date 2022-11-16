@@ -28,7 +28,7 @@ calcButton.forEach (button => {
             } else {
                 if (inputs.length == 1) {
                     clearAllInputs();
-                    mainDisplay.textContent = 0;
+                    mainDisplay.textContent = '';
                 } else {
                     removeValue();
                     combineValue();
@@ -56,11 +56,18 @@ calcButton.forEach (button => {
                     mainDisplay.textContent = '';
                     sequentialCalc++;
                 } else {
+                    if ((inputs == '')) {
+                        operator = e.target.id;
+                        secondDisplay.textContent = `${firstNum} ${operator}`;
+                        clearInputArray();
+                        mainDisplay.textContent = '';
+                    } else {
                         calculation();
                         operator = e.target.id;
                         secondDisplay.textContent = `${calcOutput} ${operator}`;
                         clearInputArray();
                         mainDisplay.textContent = '';
+                    }
                 }
                 console.log(`FullNum: ${fullNum}`);
                 console.log(`firstNum: ${firstNum}`);
