@@ -1,4 +1,5 @@
 let inputs = [];
+let sequentialCalc = 0;
 let fullNum;
 let firstNum;
 let secondNum;
@@ -35,47 +36,32 @@ calcButton.forEach (button => {
             // mainDisplay.textContent = fullNum;
             // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
-                console.log("need to string together calculations");
-                //need to figure out how to string together calculations properly here.
-                if (calcOutput === 0) {
-                    firstNum = firstNum;
-                } else if (!calcOutput) {
-                    firstNum = fullNum;    
+                if (!firstNum) {
+                    firstNum = fullNum;
                 } else {
                     firstNum = firstNum;
                 }
-                operator = e.target.id;
-                secondDisplay.textContent = `${firstNum} ${operator}`;
-                clearInputArray();
-                mainDisplay.textContent = '';
-                console.log("firstNum");
-                console.log(firstNum);
-                console.log("secondNum");
-                console.log(secondNum);
-                console.log("calcOutput");
-                console.log(calcOutput);
+                if (sequentialCalc < 1) {
+                    operator = e.target.id;
+                    secondDisplay.textContent = `${firstNum} ${operator}`;
+                    clearInputArray();
+                    mainDisplay.textContent = '';
+                    sequentialCalc++;
+                } else {
+                    calculation();
+                    operator = e.target.id;
+                    secondDisplay.textContent = `${calcOutput} ${operator}`;
+                    clearInputArray();
+                    mainDisplay.textContent = '';
+                }
         } else if (e.target.id === '=') {
-                secondNum = fullNum;
-                operate(operator,firstNum,secondNum);
-                mainDisplay.textContent = calcOutput;
-                secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
-                previousCalc = calcOutput;
+                calculation();
                 clearInputArray();
-                firstNum = calcOutput;
-                console.log(operator);
-                console.log("fullNum");
-                console.log(fullNum);
-                console.log("firstNum");
-                console.log(firstNum);
-                console.log("secondNum");
-                console.log(secondNum);
-                console.log("calcOutput");
-                console.log(calcOutput);
+                sequentialCalc = 0;
         } else {
             inputs.push(e.target.id);
             combineValue();
             mainDisplay.textContent = fullNum;
-            console.log(fullNum);
         }
     });
 });
@@ -88,8 +74,6 @@ function toggleInteger () {
         fullNum = calcOutput * -1;
     }
     console.log(fullNum);
-    // if (inputs[inputs.length - 1] === '.') {
-    // }
 }
 
 function combineValue (comboNum) {
@@ -117,6 +101,16 @@ function removeValue () {
         console.log(inputs);
     }
 }
+
+function calculation () {
+    secondNum = fullNum;
+    operate(operator,firstNum,secondNum);
+    mainDisplay.textContent = calcOutput;
+    secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
+    previousCalc = calcOutput;
+    firstNum = calcOutput;
+}
+
 
 
 function operate(operator, num1, num2) {
@@ -151,11 +145,6 @@ function division(a,b) {
     return calcOutput;
 }
 
-function clearInputs () {
-    fullNum = 0;
-    inputs = [];
-}
-
 function clearInputArray () {
     inputs = [];
 }
@@ -167,7 +156,18 @@ function clearAllInputs () {
     calcOutput = null;
     inputs = [];
     secondDisplay.textContent = '';
+    sequentialCalc = 0;
 }
 
 
 
+
+
+            // console.log(`FullNum: ${fullNum}`);
+            // console.log(`firstNum: ${firstNum}`);
+            // console.log(`secondNum: ${secondNum}`);
+            // console.log(`calcOutput: ${calcOutput}`);
+            // console.log(`outputArray: ${outputArray}`);
+            // console.log(`inputs: ${inputs}`);
+            // console.log(`operator: ${operator}`);
+            // console.log(`sequentialCalc: ${sequentialCalc}`);
