@@ -5,7 +5,7 @@ let firstNum;
 let secondNum;
 let newSecondNum;
 let calcOutput;
-let plusMinus;
+let plusMinus = 0;
 let previousCalc = fullNum;
 let operator;
 
@@ -35,13 +35,17 @@ calcButton.forEach (button => {
                     mainDisplay.textContent = fullNum;
                 }
             }
-            console.log(fullNum);
+            printIT();
         } else if (e.target.id === '+/-') {
-            console.log("coming soon");
             //there's soemthing wrong with conversions to negative and positive here. 
             //for some reason (-4 + 4) turns to (4 + 4) and addind a seconf num is automaticall negative if num1 is negative
-            // toggleInteger();
-            // mainDisplay.textContent = fullNum;
+            toggleInteger();
+            if (inputs = '') {
+                mainDisplay.textContent = firstNum;
+            } else {
+                mainDisplay.textContent = fullNum;
+            }
+            printIT();
             // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
                 if (!firstNum) {
@@ -69,48 +73,37 @@ calcButton.forEach (button => {
                         mainDisplay.textContent = '';
                     }
                 }
-                console.log(`FullNum: ${fullNum}`);
-                console.log(`firstNum: ${firstNum}`);
-                console.log(`secondNum: ${secondNum}`);
-                console.log(`calcOutput: ${calcOutput}`);
-                console.log(`inputs: ${inputs}`);
-                console.log(`operator: ${operator}`);
-                console.log(`sequentialCalc: ${sequentialCalc}`);
+                printIT();
         } else if (e.target.id === '=') {
                 calculation();
                 clearInputArray();
                 sequentialCalc = 0;
-            console.log(`FullNum: ${fullNum}`);
-            console.log(`firstNum: ${firstNum}`);
-            console.log(`secondNum: ${secondNum}`);
-            console.log(`calcOutput: ${calcOutput}`);
-            console.log(`inputs: ${inputs}`);
-            console.log(`operator: ${operator}`);
-            console.log(`sequentialCalc: ${sequentialCalc}`);
+                plusMinus = 0;
+                printIT();
         } else {
-            inputs.push(e.target.id);
-            combineValue();
-            mainDisplay.textContent = fullNum;
-            console.log(`FullNum: ${fullNum}`);
-            console.log(`firstNum: ${firstNum}`);
-            console.log(`secondNum: ${secondNum}`);
-            console.log(`calcOutput: ${calcOutput}`);
-            console.log(`inputs: ${inputs}`);
-            console.log(`operator: ${operator}`);
-            console.log(`sequentialCalc: ${sequentialCalc}`);
+            if (inputs == '' && fullNum < 0) {
+                toggleInteger();
+                inputs.push(e.target.id);
+                combineValue();
+                mainDisplay.textContent = fullNum;
+            } else {
+                inputs.push(e.target.id);
+                combineValue();
+                mainDisplay.textContent = fullNum;
+            }
         }
+        printIT();
     });
 });
 
 function toggleInteger () {
-    if (!calcOutput) {
-        fullNum = fullNum * -1;
-        calcOutput = fullNum;
-    } else {
-        fullNum = calcOutput * -1;
+        if (plusMinus < 1) {
+            fullNum = fullNum * -1;
+            plusMinus++;
+        } else {
+            fullNum = fullNum * -1;
+        }
     }
-    console.log(fullNum);
-}
 
 function combineValue (comboNum) {
     if (fullNum < 0) {
@@ -195,15 +188,13 @@ function clearAllInputs () {
     sequentialCalc = 0;
 }
 
-
-
-
-
-            // console.log(`FullNum: ${fullNum}`);
-            // console.log(`firstNum: ${firstNum}`);
-            // console.log(`secondNum: ${secondNum}`);
-            // console.log(`calcOutput: ${calcOutput}`);
-            // console.log(`outputArray: ${outputArray}`);
-            // console.log(`inputs: ${inputs}`);
-            // console.log(`operator: ${operator}`);
-            // console.log(`sequentialCalc: ${sequentialCalc}`);
+function printIT () {
+    console.log(`FullNum: ${fullNum}`);
+    console.log(`firstNum: ${firstNum}`);
+    console.log(`secondNum: ${secondNum}`);
+    console.log(`calcOutput: ${calcOutput}`);
+    console.log(`inputs: ${inputs}`);
+    console.log(`operator: ${operator}`);
+    console.log(`sequentialCalc: ${sequentialCalc}`);
+    console.log(`plusMinue: ${plusMinus}`);
+}
