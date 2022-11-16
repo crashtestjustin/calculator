@@ -20,7 +20,8 @@ calcButton.forEach (button => {
             clearAllInputs();
         } else if (e.target.id === 'del') {
             if ((sequentialCalc == 0) && (secondDisplay.textContent !== '')) {
-                clearAllInputs();
+                // clearAllInputs();
+                clearInputArray();
                 mainDisplay.textContent = 0;
             } else if ((sequentialCalc == 1) && (secondDisplay.textContent !== '')) {
                 mainDisplay.textContent = 0;
@@ -37,8 +38,6 @@ calcButton.forEach (button => {
             }
             printIT();
         } else if (e.target.id === '+/-') {
-            //there's soemthing wrong with conversions to negative and positive here. 
-            //for some reason (-4 + 4) turns to (4 + 4) and addind a seconf num is automaticall negative if num1 is negative
             toggleInteger();
             if ((inputs == '' && sequentialCalc == 0)) {
                 toggleFirstNum();
@@ -49,7 +48,6 @@ calcButton.forEach (button => {
                 mainDisplay.textContent = fullNum;
             }
             printIT();
-            // firstNum = fullNum;
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
                 if (!firstNum) {
                     firstNum = fullNum;
@@ -69,15 +67,21 @@ calcButton.forEach (button => {
                         clearInputArray();
                         mainDisplay.textContent = '';
                     } else {
-                        calculation();
-                        operator = e.target.id;
-                        secondDisplay.textContent = `${calcOutput} ${operator}`;
-                        clearInputArray();
-                        mainDisplay.textContent = '';
+                        if ((fullNum === 0 && operator === '/')) {
+                            secondDisplay.textContent = `${firstNum} ${operator}`;
+                            clearInputArray(); 
+                            mainDisplay.textContent = "eRrOr";   
+                        } else {
+                            calculation();
+                            operator = e.target.id;
+                            secondDisplay.textContent = `${calcOutput} ${operator}`;
+                            clearInputArray();
+                            mainDisplay.textContent = '';
+                        }
                     }
                 }
                 printIT();
-        } else if (e.target.id === '=') {
+        } else if (e.target.id === '=') {      
                 calculation();
                 clearInputArray();
                 sequentialCalc = 0;
@@ -144,12 +148,22 @@ function removeValue () {
 }
 
 function calculation () {
-    secondNum = fullNum;
-    operate(operator,firstNum,secondNum);
-    mainDisplay.textContent = calcOutput;
-    secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
-    previousCalc = calcOutput;
-    firstNum = calcOutput;
+    if (secondNum === undefined && mainDisplay.textContent == '') {
+        mainDisplay.textContent = "eRrOr";
+        secondDisplay.textContent = `${firstNum} ${operator}`;
+    } else {
+        secondNum = fullNum;
+        operate(operator,firstNum,secondNum);
+        if ((secondNum == 0 && operator == '/')) {
+            mainDisplay.textContent = "eRrOr";
+            secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
+        } else {
+            mainDisplay.textContent = calcOutput;
+            secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
+            previousCalc = calcOutput;
+            firstNum = calcOutput;
+        }
+    }
 }
 
 
