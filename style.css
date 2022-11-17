@@ -1,4 +1,5 @@
 body {
+    font-family: 'Overpass', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,15 +33,19 @@ body {
 .prev-display {
     display: flex;
     justify-content: flex-end;
-    margin: 5px 5px 0 0;
+    padding: 5px 5px 0 0;
+    font-size: 1.5rem;
+    min-height: 32.5px;
+    /* border: 2px solid red; */
 }
 
 .display-content {
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
-    font-size: 5rem;
-    text-overflow: ellipsis;
+    font-size: 4.5rem;
+    padding: 0 5px 0 0; 
+    /* border: 2px solid orange; */
 }
 
 .input-buttons {
