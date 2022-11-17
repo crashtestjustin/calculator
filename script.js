@@ -181,23 +181,23 @@ function operate(operator, num1, num2) {
 }
 
 function addition(a,b) {
-    calcOutput = parseFloat(a) + parseFloat(b);
-    return calcOutput;
+    calcOutput = (a + b);
+    return parseFloat(calcOutput);
 }
 
 function subtraction (a,b) {
-    calcOutput = parseFloat(a) - parseFloat(b);
-    return calcOutput;
+    calcOutput = (a) - (b);
+    return parseFloat(calcOutput);
 }
 
 function multiplication(a,b) {
-    calcOutput = parseFloat(a) * parseFloat(b);
-    return calcOutput;
+    calcOutput = (a) * (b);
+    return parseFloat(calcOutput);
 }
 
 function division(a,b) {
-    calcOutput = parseFloat(a) / parseFloat(b);
-    return calcOutput;
+    calcOutput = (a) / (b);
+    return parseFloat(calcOutput);
 }
 
 function clearInputArray () {
