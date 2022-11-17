@@ -207,7 +207,7 @@ function clearInputArray () {
 function clearAllInputs () {
     fullNum = null;
     firstNum = null;
-    secondNum = null;
+    secondNum = undefined;
     calcOutput = null;
     inputs = [];
     secondDisplay.textContent = '';
