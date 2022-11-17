@@ -6,7 +6,7 @@ let secondNum;
 let newSecondNum;
 let calcOutput;
 let plusMinus = 0;
-let previousCalc = fullNum;
+let previousCalc;
 let operator;
 
 const calcButton = document.querySelectorAll('.calc-button');
@@ -49,11 +49,9 @@ calcButton.forEach (button => {
             }
             printIT();
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
-                if (!firstNum) {
-                    firstNum = fullNum;
-                } else {
-                    firstNum = firstNum;
-                }
+            if (firstNum === undefined) {
+                firstNum = fullNum;
+            }
                 if (sequentialCalc < 1) {                    
                     operator = e.target.id;
                     secondDisplay.textContent = `${firstNum} ${operator}`;
@@ -61,7 +59,7 @@ calcButton.forEach (button => {
                     mainDisplay.textContent = '';
                     sequentialCalc++;
                 } else {
-                    if ((inputs == '')) {
+                    if ((inputs === '')) {
                         operator = e.target.id;
                         secondDisplay.textContent = `${firstNum} ${operator}`;
                         clearInputArray();
@@ -71,21 +69,30 @@ calcButton.forEach (button => {
                             secondDisplay.textContent = `${firstNum} ${operator}`;
                             clearInputArray(); 
                             mainDisplay.textContent = "eRrOr";   
+                        } else if (mainDisplay.textContent === '') {
+                            operator = e.target.id;
+                            clearInputArray();
+                            secondDisplay.textContent = `${calcOutput} ${operator}`;
+                            mainDisplay.textContent = '';
                         } else {
                             calculation();
                             operator = e.target.id;
-                            secondDisplay.textContent = `${calcOutput} ${operator}`;
                             clearInputArray();
+                            secondDisplay.textContent = `${calcOutput} ${operator}`;
                             mainDisplay.textContent = '';
                         }
                     }
                 }
                 printIT();
         } else if (e.target.id === '=') {      
+                if (operator === undefined) {
+                    mainDisplay.textContent = fullNum;
+                } else {
                 calculation();
                 clearInputArray();
                 sequentialCalc = 0;
                 plusMinus = 0;
+                }
                 printIT();
         } else {
             if (inputs == '' && fullNum < 0) {
@@ -103,8 +110,8 @@ calcButton.forEach (button => {
                 combineValue();
                 mainDisplay.textContent = fullNum;
             }
+            printIT();
         }
-        printIT();
     });
 });
 
@@ -153,6 +160,7 @@ function calculation () {
         secondDisplay.textContent = `${firstNum} ${operator}`;
     } else {
         secondNum = fullNum;
+        console.log(firstNum);
         operate(operator,firstNum,secondNum);
         if ((secondNum == 0 && operator == '/')) {
             mainDisplay.textContent = "eRrOr";
@@ -160,8 +168,8 @@ function calculation () {
         } else {
             mainDisplay.textContent = calcOutput;
             secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
-            previousCalc = calcOutput;
             firstNum = calcOutput;
+            console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         }
     }
 }
@@ -169,6 +177,7 @@ function calculation () {
 
 
 function operate(operator, num1, num2) {
+    console.log(`${num1} ${operator} ${num2}`);
     if (operator === '+') {
         addition(num1,num2);
     } else if (operator === '-') {
@@ -181,7 +190,7 @@ function operate(operator, num1, num2) {
 }
 
 function addition(a,b) {
-    calcOutput = (a + b);
+    calcOutput = (a) + (b);
     return parseFloat(calcOutput);
 }
 
@@ -205,11 +214,12 @@ function clearInputArray () {
 }
 
 function clearAllInputs () {
-    fullNum = null;
-    firstNum = null;
+    fullNum = undefined;
+    firstNum = undefined;
     secondNum = undefined;
-    calcOutput = null;
+    calcOutput = undefined;
     inputs = [];
+    operator = undefined;
     secondDisplay.textContent = '';
     sequentialCalc = 0;
 }
@@ -219,6 +229,7 @@ function printIT () {
     console.log(`firstNum: ${firstNum}`);
     console.log(`secondNum: ${secondNum}`);
     console.log(`calcOutput: ${calcOutput}`);
+    console.log(`previousCalc: ${previousCalc}`);
     console.log(`inputs: ${inputs}`);
     console.log(`operator: ${operator}`);
     console.log(`sequentialCalc: ${sequentialCalc}`);
