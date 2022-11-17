@@ -27,16 +27,15 @@ body {
     margin: 10px 5px;
     padding: 5px;
     background-color: #e6e6e6;
-    box-shadow: inset 0 0 0 5px #003d99;
+    box-shadow: inset 0 0 0 10px #003d99;
 }
 
 .prev-display {
     display: flex;
     justify-content: flex-end;
-    padding: 5px 5px 0 0;
+    padding: 10px 10px 0 0;
     font-size: 1.5rem;
     min-height: 32.5px;
-    /* border: 2px solid red; */
 }
 
 .display-content {
@@ -44,8 +43,7 @@ body {
     justify-content: flex-end;
     align-items: flex-end;
     font-size: 4.5rem;
-    padding: 0 5px 0 0; 
-    /* border: 2px solid orange; */
+    padding: 0 10px 0 0; 
 }
 
 .input-buttons {
