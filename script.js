@@ -261,6 +261,20 @@ function clearAllInputs () {
     sequentialCalc = 0;
 }
 
+document.getElementById('darkmode-toggle').addEventListener('click', () => {
+    if (window.getComputedStyle(document.documentElement).getPropertyValue('--div-main-background-color') !== '#404040' ) {
+        document.documentElement.style.setProperty('--div-main-background-color', '#404040');
+        document.documentElement.style.setProperty('--div-calculator-shadow', 'rgba(120, 120, 120, 0.56) 0px 22px 70px 4px');
+        document.documentElement.style.setProperty('--div-footer-font', '#d9d9d9');
+    } else {
+        document.documentElement.style.setProperty('--div-main-background-color', '#ffffff');
+        document.documentElement.style.setProperty('--div-calculator-shadow', 'rgb(38, 57, 77) 0px 20px 30px -10px');
+        document.documentElement.style.setProperty('--div-footer-font', '#000000');
+    }
+});
+
+
+
 function printIT () {
     console.log(`FullNum: ${fullNum}`);
     console.log(`firstNum: ${firstNum}`);
