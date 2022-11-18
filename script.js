@@ -12,15 +12,26 @@ let operator;
 const calcButton = document.querySelectorAll('.calc-button');
 const mainDisplay = document.querySelector('.display-content');
 const secondDisplay = document.querySelector('.prev-display');
+const decimalButton = document.getElementById('.');
+const deleteButton = document.getElementById('del');
+const plusMinusButton = document.getElementById('+/-');
+
+checkDecimal();
+checkDelete();
 
 calcButton.forEach (button => {
     button.addEventListener('click', e => {
         if (e.target.id === 'clear') {
             mainDisplay.textContent = '';
             clearAllInputs();
+        } else if (e.target.id === '.' && mainDisplay.textContent == '') {
+            inputs.push(0);
+            inputs.push(e.target.id);
+            combineValue();
+            mainDisplay.textContent = fullNum;
+            printIT();
         } else if (e.target.id === 'del') {
             if ((sequentialCalc == 0) && (secondDisplay.textContent !== '')) {
-                // clearAllInputs();
                 clearInputArray();
                 mainDisplay.textContent = 0;
             } else if ((sequentialCalc == 1) && (secondDisplay.textContent !== '')) {
@@ -36,6 +47,7 @@ calcButton.forEach (button => {
                     mainDisplay.textContent = fullNum;
                 }
             }
+            checkDecimal();
             printIT();
         } else if (e.target.id === '+/-') {
             toggleInteger();
@@ -59,7 +71,7 @@ calcButton.forEach (button => {
                     mainDisplay.textContent = '';
                     sequentialCalc++;
                 } else {
-                    if ((inputs === '')) {
+                    if ((inputs == '')) {
                         operator = e.target.id;
                         secondDisplay.textContent = `${firstNum} ${operator}`;
                         clearInputArray();
@@ -112,6 +124,8 @@ calcButton.forEach (button => {
             }
             printIT();
         }
+        checkDelete();
+        checkDecimal();
     });
 });
 
@@ -131,10 +145,10 @@ function toggleFirstNum () {
 function combineValue (comboNum) {
     if (fullNum < 0) {
         comboNum = inputs.join('') * -1;
-        fullNum = parseFloat(comboNum);
+        fullNum = comboNum;
     } else {
         comboNum = inputs.join('');
-        fullNum = parseFloat(comboNum);
+        fullNum = comboNum;
     }
 }
 
@@ -146,11 +160,9 @@ function removeValue () {
         if (inputs[inputs.length - 2] === '.') {
             newArray = inputs.slice(0, -2);
             inputs = newArray;
-            console.log(inputs);
         } else {
             newArray = inputs.slice(0, -1);
             inputs = newArray;
-            console.log(inputs);
         }
 }
 
@@ -160,7 +172,6 @@ function calculation () {
         secondDisplay.textContent = `${firstNum} ${operator}`;
     } else {
         secondNum = fullNum;
-        console.log(firstNum);
         operate(operator,firstNum,secondNum);
         if ((secondNum == 0 && operator == '/')) {
             mainDisplay.textContent = "eRrOr";
@@ -169,15 +180,33 @@ function calculation () {
             mainDisplay.textContent = calcOutput;
             secondDisplay.textContent = `${firstNum} ${operator} ${secondNum}`;
             firstNum = calcOutput;
-            console.log("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         }
     }
 }
 
+function checkDecimal () {
+    if (mainDisplay.textContent == '') {
+        decimalButton.disabled = false;
+    } else if (inputs.length == 1) {
+        decimalButton.disabled = false;
+    } else if (inputs.includes('.')) {
+        decimalButton.disabled = true;
+    } else {
+        decimalButton.disabled = false;
+    }
+}
 
+function checkDelete () {
+    if (mainDisplay.textContent == '') {
+        deleteButton.disabled = true;
+        plusMinusButton.disabled = true;
+    } else {
+        deleteButton.disabled = false;
+        plusMinusButton.disabled = false;
+    }
+}
 
 function operate(operator, num1, num2) {
-    console.log(`${num1} ${operator} ${num2}`);
     if (operator === '+') {
         addition(num1,num2);
     } else if (operator === '-') {
@@ -190,27 +219,27 @@ function operate(operator, num1, num2) {
 }
 
 function addition(a,b) {
-    arithmetic = (a) + (b);
-    calcOutput = round(arithmetic, 2);
-    return parseFloat(calcOutput);
+    arithmetic = parseFloat(a) + parseFloat(b);
+    calcOutput = round(arithmetic, 4);
+    return calcOutput;
 }
 
 function subtraction (a,b) {
-    arithmetic = (a) - (b);
-    calcOutput = round(arithmetic, 2);
-    return parseFloat(calcOutput);
+    arithmetic = parseFloat(a) - parseFloat(b);
+    calcOutput = round(arithmetic, 4);
+    return calcOutput;
 }
 
 function multiplication(a,b) {
-    arithmetic = (a) * (b);
-    calcOutput = round(arithmetic, 2);
-    return parseFloat(calcOutput);
+    arithmetic = parseFloat(a) * parseFloat(b);
+    calcOutput = round(arithmetic, 4);
+    return calcOutput;
 }
 
 function division(a,b) {
-    arithmetic = (a) / (b);
-    calcOutput = round(arithmetic, 2);
-    return parseFloat(calcOutput);
+    arithmetic = parseFloat(a) / parseFloat(b);
+    calcOutput = round(arithmetic, 4);
+    return calcOutput;
 }
 
 function round(value, decimals) {
