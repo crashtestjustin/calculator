@@ -1,4 +1,12 @@
+:root {
+    --div-main-background-color: #ffffff;
+    --div-display-background-color: #e6e6e6;
+    --div-calculator-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    --div-footer-font: #000000;
+}
+
 body {
+    background: var(--div-main-background-color);
     font-family: 'Overpass', sans-serif;
     display: flex;
     flex-direction: column;
@@ -6,6 +14,32 @@ body {
     justify-content: center;
     min-height: 100vh;
     margin-top: auto;
+    transition: background 0.5s ease;
+}
+
+#darkmode-toggle {
+    display: none;
+}
+
+label {
+    width: 100px;
+    height: 50px;
+    position: relative;
+    display: block;
+    background-color: #ebebeb;
+    border-radius: 75px;
+    box-shadow: inset 0px 1px 5px rbga(0,0,0,0.4), inset 0px -1px 5px rbga(255,255,255,0.4);
+    cursor: pointer;
+}
+
+label:after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: linear-gradient(180deg, #f6c36c,#f5ab2c);
 }
 
 .calculator-body {
@@ -16,7 +50,7 @@ body {
     border-radius: 25px;
     padding: 15px;
     background-color: #0066ff;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    box-shadow: var(--div-calculator-shadow);
 }
 
 .display-box {
@@ -25,7 +59,7 @@ body {
     height: 120px;
     border-radius: 8px;
     margin: 10px 5px;
-    background-color: #e6e6e6;
+    background-color: var(--div-display-background-color);
     border: 10px solid #003d99;
 }
 
@@ -65,6 +99,7 @@ body {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 1px;
     outline: none;
     border: 2px solid black;
+    cursor: pointer;
 }
 
 .calc-button:active {
@@ -75,6 +110,7 @@ body {
     background-color: #6d6d6d;
     color: #000000;
     transform: none;
+    cursor: unset;
 }
 
 .zero {
@@ -91,6 +127,8 @@ body {
 }
 
 footer {
+    color: var(--div-footer-font);
+    transition: 0.5s ease;
     display: flex;
     margin-top: auto;
 }
