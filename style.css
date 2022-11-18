@@ -25,9 +25,8 @@ body {
     height: 120px;
     border-radius: 8px;
     margin: 10px 5px;
-    padding: 5px;
     background-color: #e6e6e6;
-    box-shadow: inset 0 0 0 10px #003d99;
+    border: 10px solid #003d99;
 }
 
 .prev-display {
@@ -44,6 +43,7 @@ body {
     align-items: flex-end;
     font-size: 4.5rem;
     padding: 0 10px 0 0; 
+    overflow: hidden;
 }
 
 .input-buttons {
