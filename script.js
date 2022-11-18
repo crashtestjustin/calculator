@@ -190,24 +190,32 @@ function operate(operator, num1, num2) {
 }
 
 function addition(a,b) {
-    calcOutput = (a) + (b);
+    arithmetic = (a) + (b);
+    calcOutput = round(arithmetic, 2);
     return parseFloat(calcOutput);
 }
 
 function subtraction (a,b) {
-    calcOutput = (a) - (b);
+    arithmetic = (a) - (b);
+    calcOutput = round(arithmetic, 2);
     return parseFloat(calcOutput);
 }
 
 function multiplication(a,b) {
-    calcOutput = (a) * (b);
+    arithmetic = (a) * (b);
+    calcOutput = round(arithmetic, 2);
     return parseFloat(calcOutput);
 }
 
 function division(a,b) {
-    calcOutput = (a) / (b);
+    arithmetic = (a) / (b);
+    calcOutput = round(arithmetic, 2);
     return parseFloat(calcOutput);
 }
+
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+  }
 
 function clearInputArray () {
     inputs = [];
