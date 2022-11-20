@@ -269,7 +269,7 @@ document.getElementById('darkmode-toggle').addEventListener('click', () => {
         document.documentElement.style.setProperty('--div-header-font', '#d9d9d9');
         document.getElementById('github-icon').innerHTML = "<img id='github-icon' src='/github-white.png'>";
     } else {
-        document.documentElement.style.setProperty('--div-main-background-color', '#ffffff');
+        document.documentElement.style.setProperty('--div-main-background-color', '#d9d9d9');
         document.documentElement.style.setProperty('--div-calculator-shadow', 'rgb(38, 57, 77) 0px 20px 30px -10px');
         document.documentElement.style.setProperty('--div-footer-font', '#000000');
         document.documentElement.style.setProperty('--div-header-font', '#000000');
