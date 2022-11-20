@@ -19,7 +19,9 @@ const plusMinusButton = document.getElementById('+/-');
 checkDecimal();
 checkDelete();
 
-
+// this is most definitely not an efficient way to create a calculator. This execise was about taking my limited knowledge
+// and ability to reseach concepts to create something from scratch by myself. Maybe one day I can revisit this and recreate
+// it much faster and with much simpler code...
 
 window.addEventListener('keydown', e => {
     if (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9' || e.key === '0' || e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '=' || e.key === 'Backspace' || e.key === '.' || e.key === 'Enter' || e.key === 'c') {
