@@ -220,25 +220,25 @@ function operate(operator, num1, num2) {
 
 function addition(a,b) {
     arithmetic = parseFloat(a) + parseFloat(b);
-    calcOutput = round(arithmetic, 4);
+    calcOutput = round(arithmetic, 3);
     return calcOutput;
 }
 
 function subtraction (a,b) {
     arithmetic = parseFloat(a) - parseFloat(b);
-    calcOutput = round(arithmetic, 4);
+    calcOutput = round(arithmetic, 3);
     return calcOutput;
 }
 
 function multiplication(a,b) {
     arithmetic = parseFloat(a) * parseFloat(b);
-    calcOutput = round(arithmetic, 4);
+    calcOutput = round(arithmetic, 3);
     return calcOutput;
 }
 
 function division(a,b) {
     arithmetic = parseFloat(a) / parseFloat(b);
-    calcOutput = round(arithmetic, 4);
+    calcOutput = round(arithmetic, 3);
     return calcOutput;
 }
 
