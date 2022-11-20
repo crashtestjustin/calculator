@@ -19,9 +19,123 @@ const plusMinusButton = document.getElementById('+/-');
 checkDecimal();
 checkDelete();
 
+
+
+window.addEventListener('keydown', e => {
+    if (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9' || e.key === '0' || e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '=' || e.key === 'Backspace' || e.key === '.' || e.key === 'Enter' || e.key === 'c') {
+        console.log(e.key);
+        if (e.key === 'c') {
+            mainDisplay.textContent = '';
+            clearAllInputs();
+        } else if (e.key === '.' && mainDisplay.textContent == '') {
+            inputs.push(0);
+            inputs.push(e.key);
+            combineValue();
+            mainDisplay.textContent = fullNum;
+        } else if (e.key === 'Backspace') {
+            if ((sequentialCalc == 0) && (secondDisplay.textContent !== '')) {
+                clearInputArray();
+                mainDisplay.textContent = 0;
+            } else if ((sequentialCalc == 1) && (secondDisplay.textContent !== '')) {
+                mainDisplay.textContent = 0;
+                inputs = [];
+            } else {
+                if (inputs.length == 1) {
+                    clearAllInputs();
+                    mainDisplay.textContent = '';
+                } else {
+                    removeValue();
+                    combineValue();
+                    mainDisplay.textContent = fullNum;
+                }
+            }
+            checkDecimal();
+        } else if (e.target.id === '+/-') {
+            toggleInteger();
+            if ((inputs == '' && sequentialCalc == 0)) {
+                toggleFirstNum();
+                mainDisplay.textContent = firstNum;
+            } else if (inputs == '') {
+                mainDisplay.textContent = firstNum;
+            } else {
+                mainDisplay.textContent = fullNum;
+            }
+        } else if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+            if (firstNum === undefined) {
+                firstNum = fullNum;
+            }
+                if (sequentialCalc < 1) {                    
+                    operator = e.key;
+                    secondDisplay.textContent = `${firstNum} ${operator}`;
+                    clearInputArray();
+                    mainDisplay.textContent = '';
+                    sequentialCalc++;
+                } else {
+                    if ((inputs == '')) {
+                        operator = e.key;
+                        secondDisplay.textContent = `${firstNum} ${operator}`;
+                        clearInputArray();
+                        mainDisplay.textContent = '';
+                    } else {
+                        if ((fullNum === 0 && operator === '/')) {
+                            secondDisplay.textContent = `${firstNum} ${operator}`;
+                            clearInputArray(); 
+                            mainDisplay.textContent = "eRrOr";   
+                        } else if (mainDisplay.textContent === '') {
+                            operator = e.key;
+                            clearInputArray();
+                            secondDisplay.textContent = `${calcOutput} ${operator}`;
+                            mainDisplay.textContent = '';
+                        } else {
+                            calculation();
+                            operator = e.key;
+                            clearInputArray();
+                            secondDisplay.textContent = `${calcOutput} ${operator}`;
+                            mainDisplay.textContent = '';
+                        }
+                    }
+                }
+        } else if (e.key === 'Enter' || e.key == '=') {      
+                if (operator === undefined) {
+                    mainDisplay.textContent = fullNum;
+                } else {
+                calculation();
+                clearInputArray();
+                sequentialCalc = 0;
+                plusMinus = 0;
+                }
+        } else {
+            if (inputs == '' && fullNum < 0) {
+                toggleInteger();
+                inputs.push(e.key);
+                combineValue();
+                mainDisplay.textContent = fullNum;
+            } else if (calcOutput != undefined && inputs == '') {
+                clearInputArray();
+                inputs.push(e.key);
+                combineValue();
+                mainDisplay.textContent = fullNum;
+            } else {
+                inputs.push(e.key);
+                combineValue();
+                mainDisplay.textContent = fullNum;
+            }
+        }
+        checkDelete();
+        checkDecimal();
+    } else {
+        return
+    }
+});
+
 calcButton.forEach (button => {
     button.addEventListener('click', e => {
-        if (e.target.id === 'clear') {
+        calculatorRun(e);
+    });
+});
+
+function calculatorRun(e) {
+        if (e.target.id === 'c') {
             mainDisplay.textContent = '';
             clearAllInputs();
         } else if (e.target.id === '.' && mainDisplay.textContent == '') {
@@ -29,7 +143,6 @@ calcButton.forEach (button => {
             inputs.push(e.target.id);
             combineValue();
             mainDisplay.textContent = fullNum;
-            printIT();
         } else if (e.target.id === 'del') {
             if ((sequentialCalc == 0) && (secondDisplay.textContent !== '')) {
                 clearInputArray();
@@ -48,7 +161,6 @@ calcButton.forEach (button => {
                 }
             }
             checkDecimal();
-            printIT();
         } else if (e.target.id === '+/-') {
             toggleInteger();
             if ((inputs == '' && sequentialCalc == 0)) {
@@ -59,7 +171,6 @@ calcButton.forEach (button => {
             } else {
                 mainDisplay.textContent = fullNum;
             }
-            printIT();
         } else if (e.target.id === '+' || e.target.id === '-' || e.target.id === '*' || e.target.id === '/') {
             if (firstNum === undefined) {
                 firstNum = fullNum;
@@ -95,7 +206,6 @@ calcButton.forEach (button => {
                         }
                     }
                 }
-                printIT();
         } else if (e.target.id === '=') {      
                 if (operator === undefined) {
                     mainDisplay.textContent = fullNum;
@@ -105,7 +215,6 @@ calcButton.forEach (button => {
                 sequentialCalc = 0;
                 plusMinus = 0;
                 }
-                printIT();
         } else {
             if (inputs == '' && fullNum < 0) {
                 toggleInteger();
@@ -122,12 +231,10 @@ calcButton.forEach (button => {
                 combineValue();
                 mainDisplay.textContent = fullNum;
             }
-            printIT();
         }
         checkDelete();
         checkDecimal();
-    });
-});
+    };
 
 function toggleInteger () {
         if (plusMinus < 1) {
