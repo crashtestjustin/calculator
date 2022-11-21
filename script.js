@@ -24,7 +24,7 @@ checkDelete();
 // it much faster and with much simpler code...
 
 window.addEventListener('keydown', e => {
-    if (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9' || e.key === '0' || e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '=' || e.key === 'Backspace' || e.key === '.' || e.key === 'Enter' || e.key === 'c') {
+    if (e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5' || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9' || e.key === '0' || e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '=' || e.key === 'Backspace' || e.key === '.' || e.key === 'Enter' || e.key === 'c' || e.key === 'Delete') {
         if (e.key === 'c') {
             mainDisplay.textContent = '';
             clearAllInputs();
@@ -33,7 +33,7 @@ window.addEventListener('keydown', e => {
             inputs.push(e.key);
             combineValue();
             mainDisplay.textContent = fullNum;
-        } else if (e.key === 'Backspace') {
+        } else if (e.key === 'Backspace' || e.key === 'Delete') {
             if ((sequentialCalc == 0) && (secondDisplay.textContent !== '')) {
                 clearInputArray();
                 mainDisplay.textContent = 0;
